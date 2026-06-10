@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Space Climate AI Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="bg-orb orb-a"></div>
+  <div class="bg-orb orb-b"></div>
+
+  <main class="layout">
+    <section class="hero card">
+      <p class="tag">Global Solution 2026.1</p>
+      <h1>Space Climate AI</h1>
+      <p class="subtitle">
+        Predicao de risco de seca com dados climaticos inspirados em sensoriamento orbital.
+      </p>
+      <div class="quick-stats">
+        <div>
+          <strong>Accuracy</strong>
+          <span id="metricAccuracy">-</span>
+        </div>
+        <div>
+          <strong>F1-Score</strong>
+          <span id="metricF1">-</span>
+        </div>
+        <div>
+          <strong>ROC AUC</strong>
+          <span id="metricAuc">-</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel card">
+      <h2>Simulador de Predicao</h2>
+      <p>Preencha os indicadores ambientais e veja o risco estimado pelo modelo.</p>
+
+      <div class="actions">
+        <label class="seed-control" for="seedInput">
+          Seed do experimento
+          <input id="seedInput" type="number" min="0" max="999999" step="1" value="42">
+        </label>
+        <button id="runPipelineBtn" type="button" class="ghost">Executar pipeline (dados + treino)</button>
+        <button id="healthBtn" type="button" class="ghost">Verificar API</button>
+      </div>
+      <p id="pipelineStatus" class="status">Pronto para executar testes.</p>
+
+      <form id="predictForm" class="form-grid">
+        <label>
+          Temperatura da superficie (C)
+          <input type="number" step="0.1" name="surface_temp_c" value="33.4" required>
+        </label>
+
+        <label>
+          NDVI (0 a 1)
+          <input type="number" step="0.01" min="0" max="1" name="ndvi" value="0.21" required>
+        </label>
+
+        <label>
+          Chuva acumulada 7 dias (mm)
+          <input type="number" step="0.1" min="0" name="rainfall_mm_7d" value="3.2" required>
+        </label>
+
+        <label>
+          Umidade do solo (%)
+          <input type="number" step="0.1" min="0" max="100" name="soil_moisture_pct" value="22" required>
+        </label>
+
+        <label>
+          Cobertura de nuvens (%)
+          <input type="number" step="0.1" min="0" max="100" name="cloud_cover_pct" value="18" required>
+        </label>
+
+        <label>
+          Evapotranspiracao (mm)
+          <input type="number" step="0.1" min="0" name="evapotranspiration_mm" value="11.5" required>
+        </label>
+
+        <button id="predictBtn" type="submit">Calcular risco</button>
+      </form>
+    </section>
+
+    <section class="result card" id="resultCard" aria-live="polite">
+      <h2>Resultado</h2>
+      <div class="result-grid">
+        <div>
+          <p class="k">Nivel</p>
+          <p class="v" id="riskText">-</p>
+        </div>
+        <div>
+          <p class="k">Classe</p>
+          <p class="v" id="riskLabel">-</p>
+        </div>
+        <div>
+          <p class="k">Probabilidade</p>
+          <p class="v" id="riskProbability">-</p>
+        </div>
+      </div>
+      <div class="meter-wrap">
+        <div id="meterBar" class="meter-bar"></div>
+      </div>
+      <p id="resultMessage" class="msg">Execute uma predicao para ver o resultado.</p>
+    </section>
+
+    <section class="history card">
+      <div class="history-head">
+        <h2>Historico de Testes</h2>
+        <button id="clearHistoryBtn" type="button" class="ghost">Limpar historico</button>
+      </div>
+      <p class="history-caption">Cada predicao fica salva no navegador para facilitar comparacao entre cenarios.</p>
+
+      <div class="history-table-wrap">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Horario</th>
+              <th>Temp</th>
+              <th>NDVI</th>
+              <th>Chuva 7d</th>
+              <th>Umidade solo</th>
+              <th>Probabilidade</th>
+              <th>Nivel</th>
+            </tr>
+          </thead>
+          <tbody id="historyBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
