@@ -1,8 +1,0 @@
-{
-  "accuracy": 0.9361,
-  "f1": 0.9624,
-  "roc_auc": 0.9789,
-  "rows_train": 6570,
-  "rows_test": 2190,
-  "model": "logistic_regression_from_scratch"
-}
