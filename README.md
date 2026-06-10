@@ -184,16 +184,6 @@ O projeto atende ao desafio proposto porque integra:
 
 Mesmo sendo uma POC enxuta, a solucao demonstra com clareza como tecnologias digitais podem transformar dados ambientais em apoio a decisao com impacto direto na Terra.
 
-## Link do Repositorio
-
-- Preencher link do repositorio GitHub
-
 ## Link do Video
 
-- Preencher link do video no YouTube como nao listado
-
-## Observacoes Finais
-
-- Este projeto nao utiliza bibliotecas externas pesadas para manter compatibilidade com o ambiente local.
-- O README deve ser atualizado com os nomes finais dos integrantes antes da entrega.
-- O arquivo `PDF_ENTREGA.md` pode ser usado como base para montar o documento final em PDF.
+- https://youtu.be/Y7OGH_2tcmk
